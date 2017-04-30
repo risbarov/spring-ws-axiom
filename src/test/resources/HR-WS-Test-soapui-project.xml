@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="40db41cb-106b-449b-b1f7-998ae128932d" activeEnvironment="Default" name="HR WS Test" resourceRoot="" soapui-version="5.3.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="ea3b79c6-75d3-43a7-9820-25b2d3a65e06" wsaVersion="NONE" name="humanResourceBinding" type="wsdl" bindingName="{http://ws.sf.org/hr/definitions}humanResourceBinding" soapVersion="1_2" anonymous="optional" definition="http://localhost:8080/api/soap/hrWs.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/api/soap/hrWs.wsdl"><con:part><con:url>http://localhost:8080/api/soap/hrWs.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://ws.sf.org/hr/definitions" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:schema="http://ws.sf.org/hr/schemas" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.sf.org/hr/definitions">
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://ws.sf.org/hr/schemas" schemaLocation="hr.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="holidayRequest">
+    <wsdl:part element="schema:holidayRequest" name="holidayRequest"/>
+  </wsdl:message>
+  <wsdl:portType name="humanResource">
+    <wsdl:operation name="holiday">
+      <wsdl:input message="tns:holidayRequest" name="holidayRequest"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="humanResourceBinding" type="tns:humanResource">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="holiday">
+      <soap:operation soapAction="http://ws.sf.org/requestHoliday"/>
+      <wsdl:input name="holidayRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="humanResourceService">
+    <wsdl:port binding="tns:humanResourceBinding" name="humanResourcePort">
+      <soap:address location=""/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:8080/api/soap/hr.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="http://ws.sf.org/hr/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:hr="http://ws.sf.org/hr/schemas">
+  <xs:element name="holidayRequest">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="holiday" type="hr:holidayType"/>
+        <xs:element name="employee" type="hr:employeeType"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="holidayType">
+    <xs:sequence>
+      <xs:element name="startDate" type="xs:date"/>
+      <xs:element name="endDate" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="employeeType">
+    <xs:sequence>
+      <xs:element name="number" type="xs:integer"/>
+      <xs:element name="firstName" type="xs:string"/>
+      <xs:element name="lastName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints/><con:operation id="5127cd40-029d-4ec6-9b4e-f9dad85642b0" isOneWay="false" action="http://ws.sf.org/requestHoliday" name="holiday" bindingOperationName="holiday" type="One-Way" inputName="holidayRequest" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f463e659-5b3c-4926-926a-33be8aeb8c64" name="Request 1" timeout=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/api/soap</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:sch="http://ws.sf.org/hr/schemas">
+   <soap:Header/>
+   <soap:Body>
+      <sch:holidayRequest>
+         <!--You may enter the following 2 items in any order-->
+         <sch:holiday>
+            <sch:startDate>2017-05-20</sch:startDate>
+            <sch:endDate>2017-05-30</sch:endDate>
+         </sch:holiday>
+         <sch:employee>
+            <sch:number>112233</sch:number>
+            <sch:firstName>Петр</sch:firstName>
+            <sch:lastName>Иванов</sch:lastName>
+         </sch:employee>
+      </sch:holidayRequest>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.sf.org/requestHoliday"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="a49ee404-7a01-4326-84af-35f807239deb" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="8b5f2f43-dd99-477c-93cc-d6f1d88c352b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="request" id="c4944313-1671-45a4-b8b2-c8f1714e7810" name="holiday - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>humanResourceBinding</con:interface><con:operation>holiday</con:operation><con:request name="holiday - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="e2dd0069-c237-49e4-8a88-28ba13e4fe2d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint xsi:nil="true"/><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://ws.sf.org/hr/schemas">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:holidayRequest>
+         <!--You may enter the following 2 items in any order-->
+         <sch:holiday>
+            <sch:startDate>2017-05-20</sch:startDate>
+            <sch:endDate>2017-05-30</sch:endDate>
+         </sch:holiday>
+         <sch:employee>
+            <sch:number>112233</sch:number>
+            <sch:firstName>Иван</sch:firstName>
+            <sch:lastName>Петров</sch:lastName>
+         </sch:employee>
+      </sch:holidayRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.sf.org/requestHoliday"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

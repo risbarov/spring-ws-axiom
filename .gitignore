@@ -1,0 +1,14 @@
+/*.patch
+/*.sublime-project
+/*.sublime-workspace
+*.iml
+.gradle
+.idea
+.settings
+.vscode
+build
+settings.*.gradle
+classes
+/com.sun.aas.instanceRoot_IS_UNDEFINED
+logback-test.xml
+/.nb-gradle/

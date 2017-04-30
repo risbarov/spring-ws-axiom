@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:schema="http://ws.sf.org/hr/schemas"
+                  xmlns:tns="http://ws.sf.org/hr/definitions"
+                  targetNamespace="http://ws.sf.org/hr/definitions">
+
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://ws.sf.org/hr/schemas" schemaLocation="hr.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="holidayRequest">
+        <wsdl:part element="schema:holidayRequest" name="holidayRequest"/>
+    </wsdl:message>
+
+    <wsdl:portType name="humanResource">
+        <wsdl:operation name="holiday">
+            <wsdl:input message="tns:holidayRequest" name="holidayRequest"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="humanResourceBinding" type="tns:humanResource">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="holiday">
+            <soap:operation soapAction="http://ws.sf.org/requestHoliday"/>
+            <wsdl:input name="holidayRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="humanResourceService">
+        <wsdl:port binding="tns:humanResourceBinding" name="humanResourcePort">
+            <soap:address location=""/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
